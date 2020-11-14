@@ -1,0 +1,43 @@
+/**
+ *    ============================================================================
+ *    Nexus definitions for project
+ *    Global Config for all projects
+ *    ============================================================================
+ *    Define Global Config and Nexus locations here then use them inside your build.gradle
+ *    files in root projects.
+ *
+ *    Included from: "${rootProject.projectDir}/build.gradle"
+ *    ============================================================================
+ *    全局maven仓库配置
+ *    子模块插件整体配置
+ */
+
+allprojects {
+    apply from: "${rootProject.projectDir}/build-libraries.gradle"
+
+    repositories {
+        // 本地仓库
+        mavenLocal()
+        // 第二顺序： 阿里云
+        maven {
+            url 'http://maven.aliyun.com/nexus/content/groups/public/'
+        }
+        maven {
+            url 'http://maven.aliyun.com/nexus/content/repositories/jcenter'
+        }
+    }
+}
+
+subprojects {
+    apply plugin: 'java'
+    apply plugin: 'java-library'
+    apply plugin: 'maven'
+    apply plugin: 'idea'
+
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
+    tasks.withType(JavaCompile) {
+        options.encoding = 'UTF-8'
+    }
+    [compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
+}

@@ -1,0 +1,22 @@
+/**
+ *    ============================================================================
+ *    Library definitions for project
+ *    ============================================================================
+ *    Define here library dependencies and use them inside your build.gradle
+ *    files in sub projects.
+ *
+ *    Included from: "${rootProject.projectDir}/build-maven.gradle"
+ *    Included from: "${subProject.projectDir}/build.gradle"
+ *    ============================================================================
+ *    统一库版本控制
+ */
+ext {
+    mybatisVersion = '3.5.2'
+    mysqlVersion = '8.0.22'
+
+
+    library = [
+            mybatis : "org.mybatis:mybatis:${mybatisVersion}",
+            mysql : "mysql:mysql-connector-java:${mysqlVersion}"
+    ]
+}
