@@ -20,4 +20,16 @@ public class UserMapperTest {
 
         sqlSession.close();
     }
+
+    public static void main(String[] args) {
+        SqlSession sqlSession = MybatisUtils.getSqlSession();
+        UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+
+        List<User> userList = userMapper.getUserList();
+        for (User user : userList) {
+            System.out.println(user);
+        }
+
+        sqlSession.close();
+    }
 }
