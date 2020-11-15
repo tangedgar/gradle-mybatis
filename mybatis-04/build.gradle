@@ -1,0 +1,13 @@
+plugins {
+    id 'java'
+}
+
+group 'org.example'
+version '1.0.1'
+
+dependencies {
+    compile library['mybatis']
+    compile library['mysql']
+    compile library['log4j']
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}
