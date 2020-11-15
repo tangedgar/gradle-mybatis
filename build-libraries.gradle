@@ -13,10 +13,11 @@
 ext {
     mybatisVersion = '3.5.2'
     mysqlVersion = '8.0.22'
-
+    log4jVersion = '1.2.17'
 
     library = [
             mybatis : "org.mybatis:mybatis:${mybatisVersion}",
-            mysql : "mysql:mysql-connector-java:${mysqlVersion}"
+            mysql : "mysql:mysql-connector-java:${mysqlVersion}",
+            log4j : "log4j:log4j:${log4jVersion}"
     ]
 }
