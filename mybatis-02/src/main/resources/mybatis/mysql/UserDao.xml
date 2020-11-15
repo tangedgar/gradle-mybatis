@@ -3,19 +3,52 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.tanghui02.dao.UserMapper">
-    <select id="getUserList" resultType="com.tanghui02.mode.User">
-        select * from user;
+    <!-- 查询人员信息 -->
+    <parameterMap type="java.util.Map" id="queryUserInfoMap">
+        <parameter javaType="java.lang.Integer" property="code" mode="OUT" jdbcType="INTEGER"/>
+        <parameter javaType="java.lang.String" property="info" mode="OUT" jdbcType="VARCHAR"/>
+        <parameter property="userid" mode="IN" jdbcType="INTEGER"/>
+    </parameterMap>
+    <resultMap id="queryUserInfoResult" type="com.tanghui02.mode.User">
+        <result column="id" javaType="int" property="id" jdbcType="INTEGER"/>
+        <result column="name" javaType="java.lang.String" property="name" jdbcType="VARCHAR"/>
+        <result column="pwd" javaType="java.lang.String" property="pwd" jdbcType="VARCHAR"/>
+    </resultMap>
+    <select id="queryUserInfoBase" statementType="CALLABLE" parameterMap="queryUserInfoMap" resultMap="queryUserInfoResult">
+        CALL queryuser(?,?,?)
     </select>
-    <select id="getUserById" parameterType="int" resultType="com.tanghui02.mode.User">
-        select * from user where id = #{id}
-    </select>
-    <insert id="addUser" parameterType="com.tanghui02.mode.User">
-        insert into user(id, name, pwd) values(#{id},#{name},#{pwd})
+
+    <!-- 添加人员信息 -->
+    <parameterMap type="java.util.Map" id="addUserInfoMap">
+        <parameter javaType="java.lang.Integer" property="code" mode="OUT" jdbcType="INTEGER"/>
+        <parameter javaType="java.lang.String" property="info" mode="OUT" jdbcType="VARCHAR"/>
+        <parameter property="userid" mode="IN" jdbcType="INTEGER"/>
+        <parameter javaType="java.lang.String" property="username" mode="IN" jdbcType="VARCHAR"/>
+        <parameter javaType="java.lang.String" property="password" mode="IN" jdbcType="VARCHAR"/>
+    </parameterMap>
+    <insert id="addUserInfoBase" statementType="CALLABLE" parameterMap="addUserInfoMap">
+        CALL adduser(?,?,?,?,?)
     </insert>
-    <update id="updateUser" parameterType="com.tanghui02.mode.User">
-        update user set name=#{name},pwd=#{pwd} where id=#{id}
+
+    <!-- 修改人员信息 -->
+    <parameterMap type="java.util.Map" id="updateUserInfoMap">
+        <parameter javaType="java.lang.Integer" property="code" mode="OUT" jdbcType="INTEGER"/>
+        <parameter javaType="java.lang.String" property="info" mode="OUT" jdbcType="VARCHAR"/>
+        <parameter property="userid" mode="IN" jdbcType="INTEGER"/>
+        <parameter javaType="java.lang.String" property="username" mode="IN" jdbcType="VARCHAR"/>
+        <parameter javaType="java.lang.String" property="password" mode="IN" jdbcType="VARCHAR"/>
+    </parameterMap>
+    <update id="updateUserInfoBase" statementType="CALLABLE" parameterMap="updateUserInfoMap">
+        CALL updateuser(?,?,?,?,?)
     </update>
-    <delete id="deleteUser" parameterType="int">
-        delete from user where id = #{id}
+
+    <!-- 删除人员信息 -->
+    <parameterMap type="java.util.Map" id="deleteUserInfoMap">
+        <parameter javaType="java.lang.Integer" property="code" mode="OUT" jdbcType="INTEGER"/>
+        <parameter javaType="java.lang.String" property="info" mode="OUT" jdbcType="VARCHAR"/>
+        <parameter property="userid" mode="IN" jdbcType="INTEGER"/>
+    </parameterMap>
+    <delete id="deleteUserInfoBase" statementType="CALLABLE" parameterMap="deleteUserInfoMap">
+        CALL deleteuser(?,?,?)
     </delete>
 </mapper>

@@ -3,44 +3,38 @@ package com.tanghui02.dao;
 import com.tanghui02.mode.User;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author tanghui
  */
 public interface UserMapper {
     /**
-     * 查询User数据表所有数据
+     * 使用存储过程查询User数据表
      *
+     * @param map Map
      * @return List<User>
      */
-    List<User> getUserList();
+    List<User> queryUserInfoBase(Map<String,Object> map);
 
     /**
-     * 根据id查询
+     * 使用存储过程添加数据
      *
-     * @param id int
-     * @return User
+     * @param map Map
      */
-    User getUserById(int id);
+    void addUserInfoBase(Map<String,Object> map);
 
     /**
-     * 插入用户
+     * 使用存储过程修改数据
      *
-     * @param user User
+     * @param map Map
      */
-    void addUser(User user);
+    void updateUserInfoBase(Map<String,Object> map);
 
     /**
-     * 修改用户
+     * 使用存储过程删除数据
      *
-     * @param user User
+     * @param map Map
      */
-    void updateUser(User user);
-
-    /**
-     * 根据id删除
-     *
-     * @param id int
-     */
-    void deleteUser(int id);
+    void deleteUserInfoBase(Map<String,Object> map);
 }
