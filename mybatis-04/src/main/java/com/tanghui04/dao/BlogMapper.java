@@ -21,4 +21,20 @@ public interface BlogMapper {
      * @return List<Blog>
      */
     List<Blog> queryblogif(Map<String,Object> map);
+
+    /**
+     * 查询数据
+     *
+     * @param map rule Map
+     * @return List<Blog>
+     */
+    List<Blog> queryBlogChoose(Map<String,Object> map);
+
+    /**
+     * 更新数据
+     *
+     * @param map rule Map
+     * @return int
+     */
+    int updateBlog(Map<String,Object> map);
 }
