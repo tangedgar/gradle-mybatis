@@ -39,4 +39,22 @@ public class UserDaoTest {
         System.out.println(user==user2);
         sqlSession.close();
     }
+
+    @Test
+    public void Test(){
+        SqlSession sqlSession = MybatisUtils.getSqlSession();
+        SqlSession sqlSession2 = MybatisUtils.getSqlSession();
+
+        UserDao userDao = sqlSession.getMapper(UserDao.class);
+        User user = userDao.getUserById(1);
+        System.out.println(user);
+        sqlSession.close();
+        System.out.println("==================");
+
+        UserDao userDao2 = sqlSession2.getMapper(UserDao.class);
+        User user2 = userDao2.getUserById(1);
+        System.out.println(user2);
+        System.out.println(user==user2);
+        sqlSession2.close();
+    }
 }
