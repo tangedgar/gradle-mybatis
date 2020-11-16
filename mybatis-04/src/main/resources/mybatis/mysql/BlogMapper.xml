@@ -3,6 +3,16 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.tanghui04.dao.BlogMapper">
+    <!-- 抽取公共的sql代码 -->
+    <sql id="if-title-author">
+        <if test="title != null">
+            title = #{title},
+        </if>
+        <if test="author != null">
+            author = #{author},
+        </if>
+    </sql>
+
     <insert id="addBlog" parameterType="com.tanghui04.model.Blog">
         insert into blog (id,title,author,create_time,views)
         values (#{id},#{title},#{author},#{createtime},#{views});
@@ -39,13 +49,19 @@
     <update id="updateBlog" parameterType="map">
         update blog
         <set>
-            <if test="title != null">
-                title = #{title},
-            </if>
-            <if test="author != null">
-                author = #{author},
-            </if>
+            <include refid="if-title-author"></include>
         </set>
         where id = #{id}
     </update>
+
+    <!-- select * from blog where 1=1 and (views = 9999 or views = 8888 or views = 7777); -->
+
+    <select id="queryBlogForEach" parameterType="map" resultType="com.tanghui04.model.Blog">
+        select * from blog
+        <where>
+            <foreach item="views" collection="viewsList" open="and (" close=")" separator="or">
+                views = #{views}
+            </foreach>
+        </where>
+    </select>
 </mapper>

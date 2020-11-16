@@ -37,4 +37,12 @@ public interface BlogMapper {
      * @return int
      */
     int updateBlog(Map<String,Object> map);
+
+    /**
+     * 查询数据
+     *
+     * @param map rule Map
+     * @return List<Blog>
+     */
+    List<Blog> queryBlogForEach(Map<String,Object> map);
 }
