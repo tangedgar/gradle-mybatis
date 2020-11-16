@@ -1,0 +1,16 @@
+plugins {
+    id 'java'
+}
+
+group 'org.example'
+version '1.0.1'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile library['mybatis']
+    compile library['mysql']
+    testCompile library['junit']
+}
